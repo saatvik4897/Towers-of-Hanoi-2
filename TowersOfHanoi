@@ -1,0 +1,69 @@
+public class TowersOfHanoi{
+    private static final int NUM_DISKS = 3;
+
+    private static string [] [] towers; //visula of towers
+
+    public static void main (String[] args){
+        towers = new String[NUM_DISKS][3];
+        initTowers();
+        printTowers();
+        moveDisks(NUM_DISKS, fromRod: 0, toRod: 2, auxRod: 1);
+
+    }
+    private static void initTowers(){
+        for(int i=0; i<NUM_DISKS; i++){
+            for(int j=0; j<3; j++){
+                towers[i][j] = " | ";
+            }
+            int disk = NUM_DISKS - i;
+            towers[i][0] = String.format("%d%d%d", disk, disk, disk);
+
+        }
+    }
+    private static void printTowers(){
+        for (int i = NUM_DISKS-1; i>=0; i==){
+            for(int j = 0; j<3; j++){
+                System.out.println(towers[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println("____________");
+
+    }
+    private static void moveDisks(int n, int fromrod, int toRod, int auxRod){
+        if (n==1){
+            System.out.println("Move disk" +(fromRod + 1) + "toRod" + (toRod + 1));
+            moveDiskVisual(fromRod, toRod);
+            printTower();
+            return;
+
+        }
+        moveDisks(n-1, fromRod, auxRod, toRod);
+        System.out.println("Move disk" +(fromRod + 1) + "toRod" + (toRod + 1));
+        moveDiskVisual(fromRod, toRod);
+        printTower();
+
+        moveDisks(n-1, auxRod, toRod, fromRod);
+
+
+    }
+
+    private static void moveDiskVisual(int fromRod, int toRod){
+        int diskToMove = -1;
+        for(int i NUM_DISKS -1;i>=0; i--)
+            if(!towers[i][fromRod].equals(" | ")){
+                disktoMove = i;
+                break;
+            }
+        }
+        if(diskToMove != -1){
+            for(int i NUM_DISKS -1;i>=0; i--)
+                if(!towers[i][toRod].equals(" | ")){
+                    towers[i][toRod] = towers[diskToMove][fromRod];
+                    towers[diskToMove][fromRod] = " | ";
+                    break;
+        }
+    
+    }
+
+}
